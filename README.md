@@ -9,11 +9,11 @@
 * [Contact](#Contact)
 
 ## General
-This is an application to generate distinct permutation of given signs. /
-As a user, one can choose minimal and maximal size of permutation, amount of permutations and possible chars. /
-This is a web application hosted on Tomcat server, on default port 8082./
-Data is stored in local database and can be grabbed as a downloaded text file./
-POST requests are supported parallelly./
+This is an application to generate distinct permutation of given signs. \
+As a user, one can choose minimal and maximal size of permutation, amount of permutations and possible chars. \
+This is a web application hosted on Tomcat server, on default port 8082.\
+Data is stored in local database and can be grabbed as a downloaded text file.\
+POST requests are supported parallelly.\
 
 
 ## Techstack:
@@ -40,9 +40,9 @@ Body structure (JSON):
 
 
 ## Status and config
-This application is under construction./
-To make use of application, download the .jar file and put it in separate folder./
-You may require proper java version to be installed./
+This application is under construction.\
+To make use of application, download the .jar file and put it in separate folder.\
+You may require proper java version to be installed.\
 
 ## Contact
 
