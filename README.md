@@ -5,7 +5,7 @@
 * [General](#general)
 * [Techstack](#techstack)
 * [Endpoints](#endpoints)
-* [Status and config](#Status)
+* [Status and config](#Status and config)
 * [Contact](#Contact)
 
 ## General
