@@ -3,7 +3,7 @@ package com.edrone.task.controller;
 import com.edrone.task.models.Job;
 import com.edrone.task.repository.JobRepository;
 import com.edrone.task.service.JobService;
-import com.edrone.task.service.FileUtils;
+import com.edrone.task.service.FileUtility;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 public class JobController {
     private final JobRepository repository;
     private final JobService service;
-    private final FileUtils fileUtils;
+    private final FileUtility fileUtils;
 
     @GetMapping("/jobs/{id}")
     Job getJob(@PathVariable Long id) throws SQLException, IOException {

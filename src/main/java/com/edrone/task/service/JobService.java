@@ -21,7 +21,7 @@ import static com.edrone.task.utility.PermUtils.findSubPermutations;
 @Service
 public class JobService {
     private final JobRepository repository = new JobRepository();
-    private final FileUtils fileUtils = new FileUtils();
+    private final FileUtility fileUtils = new FileUtility();
     public JobService() {
     }
 

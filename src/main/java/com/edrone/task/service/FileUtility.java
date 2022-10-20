@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 
 @Service
-public class FileUtils {
+public class FileUtility {
     private final JobRepository repository = new JobRepository();
 
     public File createFile(long id, LocalDate date) throws IOException {
