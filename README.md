@@ -5,7 +5,7 @@
 * [General](#general)
 * [Techstack](#techstack)
 * [Endpoints](#endpoints)
-* [Status and config](#Status and config)
+* [Status&config](#Status&config)
 * [Contact](#Contact)
 
 ## General
@@ -39,7 +39,7 @@ Body structure (JSON):
 }
 
 
-## Status and config
+## Status&config
 This application is under construction.\
 To make use of application, download the .jar file (located in target folder) and put it in separate folder.\
 You may require proper java version to be installed.
