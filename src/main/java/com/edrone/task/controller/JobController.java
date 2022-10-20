@@ -3,7 +3,7 @@ package com.edrone.task.controller;
 import com.edrone.task.models.Job;
 import com.edrone.task.repository.JobRepository;
 import com.edrone.task.service.JobService;
-import com.edrone.task.utility.FileUtils;
+import com.edrone.task.service.FileUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;

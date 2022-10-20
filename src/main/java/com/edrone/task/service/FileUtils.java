@@ -1,7 +1,8 @@
-package com.edrone.task.utility;
+package com.edrone.task.service;
 
 import com.edrone.task.models.Job;
 import com.edrone.task.repository.JobRepository;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 
+@Service
 public class FileUtils {
     private final JobRepository repository = new JobRepository();
 
