@@ -2,20 +2,18 @@ package com.edrone.task.service;
 
 import com.edrone.task.models.Job;
 import com.edrone.task.repository.JobRepository;
+import com.edrone.task.utility.FileUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.regex.Matcher;
 
 import static com.edrone.task.utility.MathUtils.fact;
 import static com.edrone.task.utility.PermUtils.findPermutations;
@@ -24,7 +22,7 @@ import static com.edrone.task.utility.PermUtils.findSubPermutations;
 @Service
 public class JobService {
     private final JobRepository repository = new JobRepository();
-
+    private final FileUtils fileUtils = new FileUtils();
     public JobService() {
     }
 
@@ -44,7 +42,7 @@ public class JobService {
 
     @Async
     public void saveToFile(long id, LocalDate date, TreeSet<String> strings) throws IOException {
-        File file = createFile(id, date);
+        File file = fileUtils.createFile(id, date);
         int cnt = 0;
         if (file.createNewFile()) {
             FileOutputStream oFile = new FileOutputStream(file, false);
@@ -120,20 +118,6 @@ public class JobService {
         }
     }
 
-    public File getFile(long id) throws SQLException, IOException {
-        Job job = repository.getJob(id);
-        return new File(getWorkingPath() + "/permutations/permutation_" + id + "_" + job.getDate().toString().replaceAll("-", "_") + ".txt");
-    }
-
-    public String getFileName(long id) throws SQLException, IOException {
-        Job job = repository.getJob(id);
-        return "permutation_" + id + "_" + job.getDate().toString().replaceAll("-", "_") + ".txt";
-    }
-
-    public String getWorkingPath() {
-        return System.getProperty("user.dir").replaceAll(Matcher.quoteReplacement("\\"), "/");
-    }
-
     private long getId() throws SQLException, IOException {
         long id = 0;
         List<Job> jobs = repository.getJobs();
@@ -142,10 +126,4 @@ public class JobService {
         }
         return id + 1;
     }
-
-    private File createFile(long id, LocalDate date) throws IOException {
-        Files.createDirectories(Paths.get(getWorkingPath() + "/permutations"));
-        return new File(getWorkingPath() + "/permutations/permutation_" + id + "_" + date.toString().replaceAll("-", "_") + ".txt");
-    }
-
 }

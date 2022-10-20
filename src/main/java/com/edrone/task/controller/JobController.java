@@ -3,6 +3,7 @@ package com.edrone.task.controller;
 import com.edrone.task.models.Job;
 import com.edrone.task.repository.JobRepository;
 import com.edrone.task.service.JobService;
+import com.edrone.task.utility.FileUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -23,9 +24,10 @@ import java.util.concurrent.ExecutionException;
 public class JobController {
     private final JobRepository repository;
     private final JobService service;
+    private final FileUtils fileUtils;
 
     @GetMapping("/jobs/{id}")
-    Job job(@PathVariable Long id) throws SQLException, IOException {
+    Job getJob(@PathVariable Long id) throws SQLException, IOException {
         return repository.getJob(id);
     }
 
@@ -39,12 +41,12 @@ public class JobController {
         return repository.getActiveJobs();
     }
 
-    @GetMapping("/download/{id}")
+    @GetMapping("/jobs/get/{id}")
     @ResponseBody
     ResponseEntity<Resource> getResults(@PathVariable long id) throws SQLException, IOException {
-        File file = service.getFile(id);
+        File file = fileUtils.getFile(id);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-        String name = service.getFileName(id);
+        String name = fileUtils.getFileName(id);
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + name)
                 .contentLength(file.length())
@@ -52,7 +54,7 @@ public class JobController {
                 .body(resource);
     }
 
-    @PostMapping("/run")
+    @PostMapping("/jobs/send")
     ResponseEntity<Object> newJob(@RequestBody Job newJob) throws ExecutionException, InterruptedException {
         if (service.parametersCorrect(newJob).get()) {
             Thread newThread = new Thread(() -> {
