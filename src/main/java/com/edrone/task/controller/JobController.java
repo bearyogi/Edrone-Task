@@ -45,8 +45,8 @@ public class JobController {
     @ResponseBody
     ResponseEntity<Resource> getResults(@PathVariable long id) throws SQLException, IOException {
         File file = fileUtils.getFile(id);
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
         String name = fileUtils.getFileName(id);
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + name)
                 .contentLength(file.length())

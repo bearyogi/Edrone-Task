@@ -42,36 +42,35 @@ public class JobService {
     @Async
     public void saveToFile(long id, LocalDate date, TreeSet<String> strings) throws IOException {
         File file = fileUtils.createFile(id, date);
-        int cnt = 0;
+        int counter = 0;
         if (file.createNewFile()) {
-            FileOutputStream oFile = new FileOutputStream(file, false);
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(oFile));
+            FileOutputStream outputStream = new FileOutputStream(file, false);
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
             for (String str : strings) {
-                cnt++;
-                bw.write(str);
-                if (cnt < strings.size()) {
-                    bw.newLine();
+                counter++;
+                bufferedWriter.write(str);
+                if (counter < strings.size()) {
+                    bufferedWriter.newLine();
                 }
 
             }
-            bw.close();
-            oFile.close();
+            bufferedWriter.close();
+            outputStream.close();
         }
     }
 
     @Async
     CompletableFuture<Integer> permute(int n, int r) {
-        int ans;
-        ans = (fact(n) / fact(n - r));
-        return CompletableFuture.completedFuture(ans);
+        return CompletableFuture.completedFuture(fact(n) / fact(n - r));
     }
 
     @Async
-    public CompletableFuture<Integer> findNumberOfPermutations(int m, int n) throws ExecutionException, InterruptedException {
-        int sum = 0, P;
-        for (int r = m; r <= n; r++) {
-            P = permute(n, r).get();
-            sum = sum + P;
+    public CompletableFuture<Integer> findNumberOfPermutations(int min, int max) throws ExecutionException, InterruptedException {
+        int sum = 0;
+        int p;
+        for (int i = min; i <= max; i++) {
+            p = permute(max, i).get();
+            sum = sum + p;
         }
         return CompletableFuture.completedFuture(sum);
     }
