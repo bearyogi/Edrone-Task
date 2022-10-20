@@ -41,7 +41,7 @@ Body structure (JSON):
 
 ## Status and config
 This application is under construction.\
-To make use of application, download the .jar file and put it in separate folder.\
+To make use of application, download the .jar file (located in target folder) and put it in separate folder.\
 You may require proper java version to be installed.
 
 ## Contact
