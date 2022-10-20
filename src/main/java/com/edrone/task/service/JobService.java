@@ -2,7 +2,12 @@ package com.edrone.task.service;
 
 import com.edrone.task.models.Job;
 import com.edrone.task.repository.JobRepository;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -89,7 +94,23 @@ public class JobService {
         result &= job.getPossibleChars() != null;
         return CompletableFuture.completedFuture(result);
     }
-
+    public ResponseEntity<Object> returnResponse(long id) throws SQLException, IOException {
+        File file = fileUtils.getFile(id);
+        String name = fileUtils.getFileName(id);
+        Job job = repository.getJob(id);
+        if(job != null && job.getDate() != null) {
+            InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + name)
+                    .contentLength(file.length())
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .body(resource);
+        }else{
+            return ResponseEntity
+                    .status(HttpStatus.NO_CONTENT)
+                    .body("File not found");
+        }
+    }
     public String getResponseMessage(Job job) throws ExecutionException, InterruptedException {
         if(job.getMinLength() == 0 || job.getMaxLength() == 0 || job.getStringAmount() == 0 || job.getPossibleChars() == null){
             return "You must fill all required parameters.";

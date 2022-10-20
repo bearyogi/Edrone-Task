@@ -43,15 +43,8 @@ public class JobController {
 
     @GetMapping("/jobs/get/{id}")
     @ResponseBody
-    ResponseEntity<Resource> getResults(@PathVariable long id) throws SQLException, IOException {
-        File file = fileUtils.getFile(id);
-        String name = fileUtils.getFileName(id);
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + name)
-                .contentLength(file.length())
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(resource);
+    ResponseEntity<Object> getResults(@PathVariable long id) throws SQLException, IOException {
+        return service.returnResponse(id);
     }
 
     @PostMapping("/jobs/send")

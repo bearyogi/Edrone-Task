@@ -23,12 +23,21 @@ public class FileUtility {
 
     public String getFileName(long id) throws SQLException, IOException {
         Job job = repository.getJob(id);
-        return "permutation_" + id + "_" + job.getDate().toString().replaceAll("-", "_") + ".txt";
+        if(job != null && job.getDate() != null) {
+            return "permutation_" + id + "_" + job.getDate().toString().replaceAll("-", "_") + ".txt";
+        }else{
+            return getWorkingPath();
+        }
     }
 
     public File getFile(long id) throws SQLException, IOException {
         Job job = repository.getJob(id);
-        return new File(getWorkingPath() + "/permutations/permutation_" + id + "_" + job.getDate().toString().replaceAll("-", "_") + ".txt");
+        if(job != null && job.getDate() != null){
+            return new File(getWorkingPath() + "/permutations/permutation_" + id + "_" + job.getDate().toString().replaceAll("-", "_") + ".txt");
+        }else{
+            return new File("");
+        }
+
     }
 
     public String getWorkingPath() {
