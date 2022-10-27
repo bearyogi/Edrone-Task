@@ -4,7 +4,6 @@ import com.edrone.task.models.Job;
 import com.edrone.task.repository.JobRepository;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
