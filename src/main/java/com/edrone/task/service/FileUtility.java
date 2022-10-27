@@ -16,6 +16,9 @@ import java.util.regex.Matcher;
 public class FileUtility {
     private final JobRepository repository = new JobRepository();
 
+    public FileUtility() throws SQLException {
+    }
+
     public File createFile(long id, LocalDate date) throws IOException {
         Files.createDirectories(Paths.get(getWorkingPath() + "/permutations"));
         return new File(getWorkingPath() + "/permutations/permutation_" + id + "_" + date.toString().replaceAll("-", "_") + ".txt");

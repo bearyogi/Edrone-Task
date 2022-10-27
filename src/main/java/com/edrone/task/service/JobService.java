@@ -27,7 +27,7 @@ import static com.edrone.task.utility.PermUtils.findSubPermutations;
 public class JobService {
     private final JobRepository repository = new JobRepository();
     private final FileUtility fileUtils = new FileUtility();
-    public JobService() {
+    public JobService() throws SQLException {
     }
 
     @Async
