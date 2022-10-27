@@ -24,7 +24,7 @@ public class FileUtility {
         return new File(getWorkingPath() + "/permutations/permutation_" + id + "_" + date.toString().replaceAll("-", "_") + ".txt");
     }
 
-    public String getFileName(long id) throws SQLException, IOException {
+    public String getFileName(long id) throws SQLException {
         Job job = repository.getJob(id);
         if(job != null && job.getDate() != null) {
             return "permutation_" + id + "_" + job.getDate().toString().replaceAll("-", "_") + ".txt";
@@ -33,7 +33,7 @@ public class FileUtility {
         }
     }
 
-    public File getFile(long id) throws SQLException, IOException {
+    public File getFile(long id) throws SQLException {
         Job job = repository.getJob(id);
         if(job != null && job.getDate() != null){
             return new File(getWorkingPath() + "/permutations/permutation_" + id + "_" + job.getDate().toString().replaceAll("-", "_") + ".txt");

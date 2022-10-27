@@ -3,7 +3,7 @@ package com.edrone.task.service;
 import com.edrone.task.models.Job;
 import com.edrone.task.repository.JobRepository;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -137,7 +137,7 @@ public class JobService {
         }
     }
 
-    private long getId() throws SQLException, IOException {
+    private long getId() throws SQLException {
         long id = 0;
         List<Job> jobs = repository.getJobs();
         for (Job jb : jobs) {

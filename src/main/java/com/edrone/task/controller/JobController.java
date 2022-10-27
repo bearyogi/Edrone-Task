@@ -3,17 +3,9 @@ package com.edrone.task.controller;
 import com.edrone.task.models.Job;
 import com.edrone.task.repository.JobRepository;
 import com.edrone.task.service.JobService;
-import com.edrone.task.service.FileUtility;
 import lombok.AllArgsConstructor;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,20 +16,19 @@ import java.util.concurrent.ExecutionException;
 public class JobController {
     private final JobRepository repository;
     private final JobService service;
-    private final FileUtility fileUtils;
 
     @GetMapping("/jobs/{id}")
-    Job getJob(@PathVariable Long id) throws SQLException, IOException {
+    Job getJob(@PathVariable Long id) throws SQLException {
         return repository.getJob(id);
     }
 
     @GetMapping("/jobs")
-    List<Job> getAllJobs() throws SQLException, IOException {
+    List<Job> getAllJobs() throws SQLException {
         return repository.getJobs();
     }
 
     @GetMapping("/jobs/active")
-    List<Job> getActiveJobs() throws SQLException, IOException {
+    List<Job> getActiveJobs() throws SQLException {
         return repository.getActiveJobs();
     }
 
